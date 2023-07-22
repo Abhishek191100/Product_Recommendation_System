@@ -2,8 +2,9 @@ import { useLocation } from 'react-router-dom';
 
 import React,{useState,useEffect} from "react";
 import "./ProductDetails.css";
+
+import "./components/ac.css";
 // import "antd/dist/antd.css";
-import "./components/fridge.css";
 import { Button } from "antd";
 import { FaStarOfLife } from "react-icons/fa";
 import { Table } from "antd";
@@ -18,10 +19,10 @@ import { getDeviceDetailsById, getProductPrice } from "./util";
 import axios from "axios";
 import Search2TV from "./components/Search2TV";
 import CompareTwoMobile from "./components/CompareTwoMobile"
-// import CompareTable from "./components/CompareTable";
+
 
 const GETPRODUCTPRICE = "http://127.0.0.1:8000/compare-prices/";
-const GETPRODUCTDETAILBYURl = "http://127.0.0.1:8000/prd-detail/";
+const GETPRODUCTDETAILBYURl = "http://127.0.0.1:8000//prd-detail/";
 
 // let flipkartURL = "https://www.flipkart.com/"
 // let AmazonURL = "https://www.flipkart.com/"
@@ -211,9 +212,9 @@ const ProductDetails = ({inAnotherComponent}) => {
     },
   ]);
 
-
-
   const [prddata,setPrddata] = useState('');
+  const [showmsg,setShowmsg] = useState(false);
+
   const category = window.sessionStorage.getItem("bachat_category");
   const Url = window.sessionStorage.getItem("Url");
 
@@ -242,6 +243,8 @@ const ProductDetails = ({inAnotherComponent}) => {
     })
       .catch(function (error) {
         console.log(error);
+        setShowmsg(true)
+
     });
 };
 
@@ -249,16 +252,17 @@ const id = sessionStorage.getItem("bachat_search_phone");
 var byurl = sessionStorage.getItem("byurl");
 var byurl= parseInt(byurl);
 
-
-
-
+const showMsg = (
+  <>
+    <h1>No Data Available</h1>
+  </>
+) 
 
 
   React.useEffect(() => {
     async function fetchData() {
       const id = sessionStorage.getItem("bachat_search_phone");
       // console.log("id = "+id)
-     
       if(byurl) {
         getProductDetailsByUrl();
         console.log("url")
@@ -268,8 +272,7 @@ var byurl= parseInt(byurl);
         setData(temp);
         setLoading(false);
         
-      }
-
+      };
     }
     fetchData();
   }, []);
@@ -409,10 +412,15 @@ var byurl= parseInt(byurl);
       <>
         <div
           className="d-flex justify-content-center align-items-center"
-          style={{ height: 650, backgroundColor: "#526476" }}
+          style={{ height: 650, backgroundColor: "#526476",textAlignLast: 'center' }}
         >
-          <CircularProgress className="" style={{ color: "white" }} />
-        </div>
+              {showmsg&&(
+                  showMsg
+                )}
+                {!showmsg&&(
+                  <CircularProgress className="" style={{ color: "white" }} />
+                  )}
+            </div>
       </>
     );
   } else var coverimage = data.Images;
@@ -428,11 +436,11 @@ var byurl= parseInt(byurl);
   } else {
     coverimage = coverimage.substring(2, coverimage.length - 2);
   }
-  
-  // coverimage = coverimage.substring(2, coverimage.length - 2);
+
   let secondProductScreen = window.sessionStorage.getItem("secondProductScreen");
 
   
+  // coverimage = coverimage.substring(2, coverimage.length - 2);
   return (
     <>
         <div style={inAnotherComponent && !isMobile ? { 'display' : 'none' } : { 'display' : 'block' }}>
@@ -540,8 +548,7 @@ var byurl= parseInt(byurl);
                     </div>
                     <div className="flip-price">Rs. {dataSourceMobile[0].Price}</div>
                   </div>
-                </div>
-                <a href={dataSourceMobile[0].Link}  target="_blank" >
+                </div>                <a href={dataSourceMobile[0].Link} target="_blank"  >
                 <button className="flipbtn" > <span>Go To Flipkart</span> <span>></span></button>
                 </a>
               </div>
@@ -571,7 +578,7 @@ var byurl= parseInt(byurl);
                   </div>
                 </div>
                 <a href={dataSourceMobile[1].Link}
-                target="_blank" 
+                target="_blank"
                   style={dataSourceMobile[1].available?{ 'display' : 'block' } : { 'display' : 'none' }}
                 >
                   <button className="flipbtn" > <span>Go To Amazon</span> <span>></span></button>
@@ -743,7 +750,7 @@ var byurl= parseInt(byurl);
       </div> */}
       {/* <div className="plain_txt"> */}
       <div
-        className="bxfr"
+        className="bxac"
         style={{
           backgroundColor: "#526476",
           minHeight: "850px",
@@ -778,49 +785,61 @@ var byurl= parseInt(byurl);
               <th scope="row">Name</th>
               <td>{data.Name == "" ? "-" : data.Name}</td>
             </tr>
+            <tr>
+              <th scope="row">Brand</th>
+              <td>{data.Brand == "" ? "-" : data.Brand}</td>
+            </tr>
             {/* <tr>
               <th scope="row">Price</th>
               <td>{data.Price == "" ? "-" : data.Price}</td>
             </tr> */}
             <tr>
+              <th scope="row">Model Name</th>
+              <td>{data.Model_Name == "" ? "-" : data.Model_Name}</td>
+            </tr>
+            <tr>
               <th scope="row">Highlights</th>
               <td>{data.Highlights == "" ? "-" : data.Highlights}</td>
+            </tr>
+            <tr>
+              <th scope="row">Annual Energy Consumption</th>
+              <td>
+                {data.Annual_Energy_Consumption == ""
+                  ? "-"
+                  : data.Annual_Energy_Consumption}
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Battery Type</th>
+              <td>{data.Battery_Type == "" ? "-" : data.Battery_Type}</td>
+            </tr>
+            <tr>
+              <th scope="row">Capacity in Tons</th>
+              <td>
+                {data.Capacity_in_Tons == "" ? "-" : data.Capacity_in_Tons}
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Condenser Coil</th>
+              <td>{data.Condenser_Coil == "" ? "-" : data.Condenser_Coil}</td>
+            </tr>
+            <tr>
+              <th scope="row">Cooling Capacity</th>
+              <td>
+                {data.Cooling_Capacity == "" ? "-" : data.Cooling_Capacity}
+              </td>
             </tr>
             <tr>
               <th scope="row">Type</th>
               <td>{data.Type == "" ? "-" : data.Type}</td>
             </tr>
             <tr>
-              <th scope="row">Number_Of_Doors</th>
-              <td>{data.Number_Of_Doors == "" ? "-" : data.Number_Of_Doors}</td>
+              <th scope="row">Noise Level</th>
+              <td>{data.Noise_Level == "" ? "-" : data.Noise_Level}</td>
             </tr>
             <tr>
-              <th scope="row">Dimensions</th>
-              <td>{data.Dimensions == "" ? "-" : data.Dimensions}</td>
-            </tr>
-            <tr>
-              <th scope="row">Capacity</th>
-              <td>{data.Capacity == "" ? "-" : data.Capacity}</td>
-            </tr>
-            <tr>
-              <th scope="row">Compressor_Type</th>
-              <td>{data.Compressor_Type == "" ? "-" : data.Compressor_Type}</td>
-            </tr>
-            <tr>
-              <th scope="row">Built_In_Stabilizer</th>
-              <td>
-                {data.Built_In_Stabilizer == ""
-                  ? "-"
-                  : data.Built_In_Stabilizer}
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">Launch_Year</th>
-              <td>{data.Launch_Year == "" ? "-" : data.Launch_Year}</td>
-            </tr>
-            <tr>
-              <th scope="row">Star Rating</th>
-              <td>{data.Star_Rating == "" ? "-" : data.Star_Rating}</td>
+              <th scope="row">Voltage</th>
+              <td>{data.Voltage == "" ? "-" : data.Voltage}</td>
             </tr>
             <tr>
               <th scope="row">Warranty</th>

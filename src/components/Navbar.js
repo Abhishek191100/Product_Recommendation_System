@@ -1,7 +1,8 @@
 import React,{useState,useEffect} from "react";
 import "antd/dist/antd.css";
 import "./Navbar.css";
-import logo from "./img/ncr_logo.png";
+//import logo from "./img/ncr_logo.png";
+import logo from "./img/ncr_logo_1.png";
 import humbergerbar from "./img/icons/humburgerbar.png";
 import { Input } from "antd";
 import { MdShoppingCart } from "react-icons/md";
@@ -15,7 +16,6 @@ import LaptopIcon from "@material-ui/icons/Laptop";
 import AcUnitIcon from "@material-ui/icons/AcUnit";
 import LocalLaundryServiceIcon from "@material-ui/icons/LocalLaundryService";
 import Fastfood from "@material-ui/icons/Fastfood";
-import BakeryDiningSharpIcon from "@material-ui/icons/Restaurant";
 import LocalBar from "@material-ui/icons/LocalBar";
 
 const Navbar = () => {

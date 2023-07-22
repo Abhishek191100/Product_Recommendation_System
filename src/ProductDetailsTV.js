@@ -20,8 +20,8 @@ import Search2TV from "./components/Search2TV";
 import CompareTwoMobile from "./components/CompareTwoMobile"
 // import CompareTable from "./components/CompareTable";
 
-const GETPRODUCTPRICE = "https://bachat-rest.azurewebsites.net/compare-prices/";
-const GETPRODUCTDETAILBYURl = "https://bachat-rest.azurewebsites.net/prd-detail/";
+const GETPRODUCTPRICE = "http://127.0.0.1:8000/compare-prices/";
+const GETPRODUCTDETAILBYURl = "http://127.0.0.1:8000/prd-detail/";
 
 // let flipkartURL = "https://www.flipkart.com/"
 // let AmazonURL = "https://www.flipkart.com/"

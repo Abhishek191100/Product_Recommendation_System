@@ -1,10 +1,10 @@
 import axios from "axios";
 //const BASE_URL = "https://bachat-rest.azurewebsites.net";
-const GETNAMES = "https://bachat-rest.azurewebsites.net/get-names/";
-const GETPRODUCTDETAILS = "https://bachat-rest.azurewebsites.net/get-product/";
+const GETNAMES = "http://127.0.0.1:8000/get-names";
+const GETPRODUCTDETAILS = "http://127.0.0.1:8000/get-product/";
 const GETPRODUCTDETAILSBYID =
-  "https://bachat-rest.azurewebsites.net/prd-detail-db/";
-const GETPRODUCTPRICE = "https://bachat-rest.azurewebsites.net/compare-prices/";
+  "http://127.0.0.1:8000/prd-detail-db/";
+const GETPRODUCTPRICE = "http://127.0.0.1:8000/compare-prices/";
 
 export const getProduct = async (category, name) => {
   var data = new FormData();
@@ -36,13 +36,15 @@ export const getNames = async (val, category, token) => {
   const res = await axios.get(`${GETNAMES}/${category}/${val}`, {
     cancelToken: token,
   });
-  //console.log(res.data.prds)
+  // console.log(res.data.prds)
+
+  console.log(res.data.prds);
   return res.data.prds;
 };
 //getNames("moto")
 
-export const getDeviceDetailsById = async (id) => {
-  const res = await axios.get(`${GETPRODUCTDETAILSBYID}${id}/`);
+export const getDeviceDetailsById = async (category,id) => {
+  const res = await axios.get(`${GETPRODUCTDETAILSBYID}${category}/${id}/`);
   const data = res.data.prd;
   console.log(data);
   return data;

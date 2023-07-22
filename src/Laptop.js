@@ -105,10 +105,18 @@ const Laptop = () => {
   const getDataFromAPI = async (val, id) => {
     const category = "laptop";
     const res = await getNames(val, category);
-    options.length = 0;
-    setMyOptions(res);
-    if (id === 1) setValue1(res[0]);
-    else setValue2(res[0]);
+    console.log("Result Array:", res);
+
+    if (Array.isArray(res) && res.length > 0) {
+      options.length = 0;
+      setMyOptions(res);
+      if (id === 1) setValue1(res[0]);
+      else setValue2(res[0]);
+    } else {
+      // Handle the case when 'res' is not an array or empty
+      // For example, you can set some default values or show an error message.
+      console.error("Error: 'res' is not a valid array or is empty.");
+    }
   };
 
   const handleSearchFirst = (data) => {
@@ -259,11 +267,11 @@ const Laptop = () => {
               noOptionsText=""
               options={options}
               value={value1}
-              getOptionLabel={(option) => option.name}
+              getOptionLabel={(option) => option}
               renderOption={(option) => (
                 <>
                   {/* {option.name} */}
-                   <p onClick={submitSearchFirst}>{option.name}</p>
+                   <p onClick={submitSearchFirst}>{option}</p>
                 </>
               )}
               onChange={(event, newValue) => {

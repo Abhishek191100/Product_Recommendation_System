@@ -13,7 +13,7 @@ import { NavLink } from "react-router-dom";
    
 // newarrival
 import axios from "axios";
-const GETPRODUCTDETAILBYURl = "https://bachat-rest.azurewebsites.net/prd-detail/";
+const GETPRODUCTDETAILBYURl = "http://127.0.0.1:8000/prd-detail/";
 
 
 export default function CompareTwoMobile() {

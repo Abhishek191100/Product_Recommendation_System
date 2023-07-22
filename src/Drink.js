@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "antd/dist/antd.css";
-import "./components/fridge.css";
+import "./components/drink.css";
 import { Button } from "antd";
 import { LeftOutlined, MobileOutlined, PlusOutlined } from "@ant-design/icons";
 import { makeStyles } from "@material-ui/core/styles";
@@ -12,6 +12,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import IconButton from "@material-ui/core/IconButton";
 import { Input } from "antd";
 import KitchenIcon from "@material-ui/icons/Kitchen";
+import LocalBar from "@material-ui/icons/LocalBar";
 import beside_search_pic from "./components/img/beside_search_pic.svg";
 
   
@@ -89,7 +90,7 @@ const Drink = () => {
   const [searchfirst, setSearchfirst] = useState("");
   const [searchsecond, setSearchsecond] = useState("");
   const firstUpdate = useRef(true);
-  window.sessionStorage.setItem("bachat_category", "refrigerator");
+  window.sessionStorage.setItem("bachat_category", "drink");
 
   useEffect(() => {
     if (firstUpdate.current) {
@@ -104,7 +105,7 @@ const Drink = () => {
 
   const getDataFromAPI = async (val, id) => {
     /*change*/
-    const category = "refrigerator";
+    const category = "drink";
     const res = await getNames(val, category);
     options.length = 0;
     setMyOptions(res);
@@ -140,7 +141,7 @@ const Drink = () => {
         /*change*/
         window.sessionStorage.setItem("secondProductScreen",0);
 
-      window.location = `/search/refrigerator/product`;
+      window.location = `/search/drink/product`;
     }
   };
 
@@ -165,7 +166,7 @@ const Drink = () => {
       window.sessionStorage.setItem("bachat_phone_2", searchsecond);
       window.sessionStorage.setItem("bachat_search_phone", customValue2);
         /*change*/
-      window.location = `/search/refrigerator/product`;
+      window.location = `/search/drink/product`;
     }
   };
 
@@ -179,12 +180,12 @@ const Drink = () => {
       console.log(searchfirst + " only 1");
       window.sessionStorage.setItem("bachat_phone_search", searchfirst);
       /*change*/
-      window.location = `/search/refrigerator/product`;
+      window.location = `/search/drink/product`;
     } else if (searchsecond) {
       console.log(searchsecond + " only 2");
       window.sessionStorage.setItem("bachat_phone_search", searchsecond);
       /*change*/
-      window.location = `/search/refrigerator/product/}`;
+      window.location = `/search/drink/product/}`;
     }
   };
 
@@ -226,7 +227,9 @@ const Drink = () => {
             }}
           >
             {/* change */}
-            <KitchenIcon className="deviceiconsp" style={{ fontSize: "8.25rem", color: "#000" }} />
+            <LocalBar
+               style={{fontSize: "3rem", color: "#000"}}
+              />
           </div>
           <h4 className="mobiletag" style={{marginRight:"93px"}}>Refrigerator</h4>
         </div>
@@ -246,7 +249,9 @@ const Drink = () => {
         <LeftOutlined style={{ color: "#CAC8C8", fontSize: "1rem" }} />
       </Button>
       <div className="onlymobile">
-      <KitchenIcon style={{fontSize:"6rem",width: "100%"}}  className="mobileImg " />
+      <LocalBar
+               style={{fontSize: "3rem", color: "#000"}}
+              />
 
       </div>
       <div className="compare_device">
@@ -358,7 +363,7 @@ const Drink = () => {
                   <TextField
                     {...params}
                     className={classes.input}
-                    placeholder={"Search For Refrigerator Brand"}
+                    placeholder={"Search For Drink"}
                   />
                   <IconButton
                     onClick={submitSearchSecond}

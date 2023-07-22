@@ -8,7 +8,7 @@ import { getDeviceDetailsById, getProductPrice } from "../util";
 import axios from "axios";
 import SearchNewArrival from '../components/SearchNewArrival';
 
-const GETPRODUCTDETAILS = "https://bachat-rest.azurewebsites.net/get-product/";
+const GETPRODUCTDETAILS = "http://127.0.0.1:8000/get-product/";
 
 export default function NewArrival() {
     const [data,setData] = useState([]);
