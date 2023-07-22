@@ -1,0 +1,178 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+
+import React,{useState} from 'react';
+import ComparePanelxs from './ComparePanelxs'
+import CircularProgress from '@material-ui/core/CircularProgress';
+import {getDeviceDetailsById} from '../util/index.js'
+
+const TwoCompare = () => {
+
+    const [data1, setdata1] = useState();
+    const [data2, setdata2] = useState();
+    const [loading,setloading] = useState(true);
+    const b_category = sessionStorage.getItem("bachat_category")
+    React.useEffect(() => {
+      async function fetchData(){  
+        const id1 = sessionStorage.getItem("bachat_phone_1_id");
+        const id2 = sessionStorage.getItem("bachat_phone_2_id")
+        if (id1==0||id2==0||id1==null||id2==null) {
+            window.location = `/${b_category}`;       
+        }
+        const res1 = await getDeviceDetailsById(id1);
+        const res2 = await getDeviceDetailsById(id2);
+        setdata1(res1);
+        setdata2(res2);
+        setloading(false);
+        sessionStorage.setItem("bachat_phone_1_id",0)
+        sessionStorage.setItem("bachat_phone_2_id",0)
+        sessionStorage.setItem("bachat_phone_1","")
+        sessionStorage.setItem("bachat_phone_2","")
+      }
+      fetchData()
+    }, [])
+
+    if (loading) {
+        return (
+            <>
+                <div className="d-flex justify-content-center align-items-center" style={{height: 200}}>
+                    <CircularProgress />
+                </div>
+            </>
+        );
+    }
+
+        var coverimage1 = data1.Images;
+        coverimage1 = coverimage1.substring(2, coverimage1.length-2);
+
+        var coverimage2 = data2.Images;
+        coverimage2 = coverimage2.substring(2, coverimage2.length-2);
+
+    return (
+        <div className='compares'>
+            <ComparePanelxs/>
+            <div className='compare_d'>
+                <div className='main'>
+                    {
+                        if(b_category=="ac")
+                            return <ACunit data1={data1} data2={data2} coverimage1={coverimage1} coverimage2={coverimage2}/> 
+                        else if(b_category=="refridgerator")
+                            return <Fridge data1={data1} data2={data2} coverimage1={coverimage1} coverimage2={coverimage2}/> 
+                        else if(b_category=="laptop")
+                            return <Laptop data1={data1} data2={data2} coverimage1={coverimage1} coverimage2={coverimage2}/>
+                        else if(b_category=="mobile")
+                            return <Mobile data1={data1} data2={data2} coverimage1={coverimage1} coverimage2={coverimage2}/> 
+                        else if(b_category=="tv")
+                            return <Tv data1={data1} data2={data2} coverimage1={coverimage1} coverimage2={coverimage2}/> 
+                        else if(b_category=="washingmachine")
+                            return <Washing data1={data1} data2={data2} coverimage1={coverimage1} coverimage2={coverimage2}/> 
+                        else
+                            return ""  
+                    }
+                </div>            
+            </div>
+        </div>
+    )
+}
+
+export default TwoCompare;
+
+
+const Mobile = (props) => (
+<>
+<div className='contents' id='hide'>
+    <div className='purple'>
+        <div style={{width: '100%',height:'85%',display: 'flex',justifyContent:'space-between',flexDirection:'column'}}>
+        <div className='info' id='info'>Ratings</div>
+        <div className='info' id='info'>Score</div>
+        <div className='info' id='info'>Operating System</div>
+        <div className='info' id='last'>Unique Features</div>
+        <div className='info' id='last'>Unique Features</div>
+        <div className='info' id='last'>Unique Features</div>
+        </div>
+    </div>
+</div>
+<div className='contents'>
+    <div className='comp_pic'>
+        <img style={{width:'75px',height:'140px'}} src={coverimage1} alt={props.data2.Name}></img>
+        <p>{props.data1.Name}</p>
+        <div className='pr'>{props.data1.Price}</div>
+    </div>
+    <div className='purple1'>
+        <div style={{width: '100%',height:'85%',display: 'flex',justifyContent:'space-between',flexDirection:'column'}}>
+        <div className='info info1' id='info'>{props.data1.Rating_Num===""?"-":props.data1.Rating_Num}</div>
+        <div className='info info1' id='info'>46/100=-not defined</div>
+        <div className='info info1' id='info'>{props.data1.OS===""?"-":props.data1.OS}</div>
+        <div className='info last1' id='last'>{props.data1.Highlights===""?"-":props.data1.Highlights}</div>
+        <div className='info last1' id='last'>{props.data1.Front_Camera===""?"-":props.data1.Front_Camera}</div>  
+        <div className='info last1' id='last'>{props.data1.Rear_Camera===""?"-":props.data1.Rear_Camera}</div>  
+        <div className='info last1' id='last'>{props.data1.Battery_Size===""?"-":props.data1.Battery_Size}</div>
+        <div className='info last1' id='last'>{props.data1.Brand_Name===""?"-":props.data1.Brand_Name}</div>
+        <div className='info last1' id='last'>{props.data1.Clock_Speed===""?"-":props.data1.Clock_Speed}</div>
+        <div className='info last1' id='last'>{props.data1.Color===""?"-":props.data1.Color}</div>
+        <div className='info last1' id='last'>{props.data1.Dimension===""?"-":props.data1.Dimension}</div>
+        <div className='info last1' id='last'>{props.data1.Expandable_Memory===""?"-":props.data1.Expandable_Memory}</div>
+        <div className='info last1' id='last'>{props.data1.Front_Camera===""?"-":props.data1.Front_Camera}</div>
+        <div className='info last1' id='last'>{props.data1.Internal_Memory===""?"-":props.data1.Internal_Memory}</div>
+        <div className='info last1' id='last'>{props.data1.Model_Number===""?"-":props.data1.Model_Number}</div>
+        <div className='info last1' id='last'>{props.data1.Processor===""?"-":props.data1.Processor}</div>
+        <div className='info last1' id='last'>{props.data1.RAM===""?"-":props.data1.RAM}</div>
+        <div className='info last1' id='last'>{props.data1.Weight===""?"-":props.data1.Weight}</div>
+        <div className='info last1' id='last'>{props.data1.Warranty===""?"-":props.data1.Warranty}</div>
+        </div>
+  </div>
+</div>
+<div className='contents'>
+    <div className='comp_pic'>
+        <img style={{width:'75px',height:'140px'}} src={coverimage2} alt={props.data2.Name}></img>
+        <p>{props.data2.Name}</p>
+        <div className='pr'>{props.data2.Price}</div>
+    </div>
+    <div className='purple2'>
+        <div style={{width: '100%',height:'85%',display: 'flex',justifyContent:'space-between',flexDirection:'column'}}>
+        <div className='info info1' id='info'>{props.data2.Rating_Num===""?"-":props.data2.Rating_Num}</div>
+        <div className='info info1' id='info'>42/100=-no2 defined</div>
+        <div className='info info1' id='info'>{props.data2.OS===""?"-":props.data2.OS}</div>
+        <div className='info last1' id='last'>{props.data2.Highlights===""?"-":props.data2.Highlights}</div>
+        <div className='info last1' id='last'>{props.data2.Front_Camera===""?"-":props.data2.Front_Camera}</div>  
+        <div className='info last1' id='last'>{props.data2.Rear_Camera===""?"-":props.data2.Rear_Camera}</div>  
+        <div className='info last1' id='last'>{props.data2.Battery_Size===""?"-":props.data2.Battery_Size}</div>
+        <div className='info last1' id='last'>{props.data2.Brand_Name===""?"-":props.data2.Brand_Name}</div>
+        <div className='info last1' id='last'>{props.data2.Clock_Speed===""?"-":props.data2.Clock_Speed}</div>
+        <div className='info last1' id='last'>{props.data2.Color===""?"-":props.data2.Color}</div>
+        <div className='info last1' id='last'>{props.data2.Dimension===""?"-":props.data2.Dimension}</div>
+        <div className='info last1' id='last'>{props.data2.Expandable_Memory===""?"-":props.data2.Expandable_Memory}</div>
+        <div className='info last1' id='last'>{props.data2.Front_Camera===""?"-":props.data2.Front_Camera}</div>
+        <div className='info last1' id='last'>{props.data2.Internal_Memory===""?"-":props.data2.Internal_Memory}</div>
+        <div className='info last1' id='last'>{props.data2.Model_Number===""?"-":props.data2.Model_Number}</div>
+        <div className='info last1' id='last'>{props.data2.Processor===""?"-":props.data2.Processor}</div>
+        <div className='info last1' id='last'>{props.data2.RAM===""?"-":props.data2.RAM}</div>
+        <div className='info last1' id='last'>{props.data2.Weight===""?"-":props.data2.Weight}</div>
+        <div className='info last1' id='last'>{props.data2.Warranty===""?"-":props.data2.Warranty}</div>
+        </div>
+    </div>
+</div>
+</>
+);

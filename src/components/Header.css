@@ -1,0 +1,228 @@
+
+@media only screen and (max-width:768px){
+.header {
+    display: block !important;
+    justify-content: none !important;
+    align-items: none !important;
+    background: none !important;
+    height: 260px !important;
+}
+.header .img{
+    display: none !important;
+}
+
+.header .text {
+    width: unset !important;
+    height: unset !important;
+    padding: 0 !important;
+    /* background: url('../components/img/hero.png'); */
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.header .text .heroimg {
+    width: 100% !important;
+    position: absolute !important;
+}
+
+.herosection{
+    position: relative !important;
+    top: 60px !important;
+    left: 30px !important;
+}
+.text .herotext1{
+    font-size: 24px !important;
+    color: #FFFFFF !important;
+    line-height: 34px !important;
+}
+
+.text .herotext2{
+    font-size: 10px !important;
+    line-height: 13px !important;
+    margin-bottom: 1em !important;
+}
+.ecomicon{
+    display: flex;
+}
+.ecomicon .flipkard {
+    width: 50px !important;
+    object-fit: contain !important;
+    height: 15px !important;
+}
+.ecomicon .amazon {
+    width: 64px !important;
+    object-fit: contain !important;
+    height: 20px !important;
+}
+
+.box {
+    display: none !important;
+}
+.downloadBox {
+    width: 100%;
+    text-align: -webkit-center;
+    margin-top: 72px;
+  }
+
+.downloadmobile{
+    position: relative;
+    top: 195px;
+    width: 166px;
+    height: 40px;
+    font-size: 15px;
+    color: #5146FF;
+    font-weight: bold;
+    border-radius: 40px !important;
+    background: #ffe108;
+    border: #ffe108;
+
+}
+
+.blank{
+    display: none;
+}
+
+.header{
+    /* overflow: hidden */
+    overflow-x: clip;
+
+}
+
+}
+
+@media only screen and (max-width:425px){
+    .downloadBox{
+      margin-top: -82px;
+    }
+  }
+
+
+/* start hero web */
+.p-item {
+    font-size: 12px;
+}
+.heroimg {
+    width: 100%;
+    position: absolute;
+}
+
+.herosection {
+    position: relative;
+    top: 140px;
+    left: 10rem;
+}
+.herotext2{
+    margin-bottom: 0;
+}
+
+/* end hero web */
+.brand>h1{
+    font-size: 2rem !important;
+
+}    
+.b1>li{
+    font-size: 1.5rem !important;
+}
+
+.mobilename {
+    display: flex;
+    align-items: center;
+    place-content: center;
+}
+
+.download{
+    margin-top: 1.5rem ;
+    color: #5146FF !important;
+    font-size: 18px;
+    font-weight: 500;
+}
+.header { 
+    width: 100%;
+    height: 650px;
+    background: #A9A6FB;
+    /* display: flex; */
+        /* justify-content: center; */
+    align-items: center;
+}
+.header .text{ 
+    /* width: 50%;
+    height: inherit;
+    padding-left: 7rem;
+    padding-top: 8rem; */
+}
+
+.box{
+    width: 63px;
+    height: 48px;
+    background: #FFFFFF;
+    border-radius: 12px;
+    margin-right: 1rem;
+}
+.ant-btn-lg{
+    padding: 6.4px 3.5rem!important;
+}
+.download{
+    height: 55px!important;
+    color: #5146FF!important;
+    margin-top: 20rem !important;
+    position: absolute !important;
+    margin-left: -13rem !important;
+    width: 218px !important;
+}
+.download:hover , .compare_products:hover{
+    background-color: #5146FF!important;
+    color: #FFE108!important;
+}
+.header .img {
+    /* display: none; */
+    width: 50%;
+    height: inherit;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+}
+
+
+/*Blank portion*/
+.blank{
+    width: 100%;
+    height: 520px;
+    background: #7269FF;
+}
+
+
+@media only screen and (min-width: 1024px) {
+  .header{
+    height: 490px;
+  }
+  
+.contenths {
+    padding: 5rem 3rem !important;
+    margin-top: 140px;
+  }
+  .menuwidth {
+    width: 950px !important;
+  }
+  .header {
+    width: 100%;
+    height: 471px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+    .contenths {
+        padding: 5rem 8rem !important;
+        margin-top: 177px;
+      }
+}
+
+@media (max-width: 900px) and (min-width: 769px) {
+    .download {
+        margin-top: 11rem !important; 
+    }
+
+    .header{
+        height: unset !important;
+    }
+    
+}
